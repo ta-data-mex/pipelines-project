@@ -46,8 +46,12 @@ for fecha in dias_tabla:
     promedios_temperaturas.loc[fecha,'MGH'] = temperaturasXdia['MGH'].mean()
 
 #Se ordena el indice ya que antes era un Set
-promedios_temperaturas.sort_index(inplace=True)
+
+promedios_temperaturas.reset_index(inplace=True)
+promedios_temperaturas = promedios_temperaturas.rename(columns = {'index':'Fecha'})
+promedios_temperaturas.sort_values ('Fecha',inplace=True)
+
 #En el siguiente documento se tienen los promedios diarios de temperatura
-promedios_temperaturas.to_csv('PromediosDiarios2019.csv')
+promedios_temperaturas.to_csv('PromediosDiarios2019.csv',index=False)
 
 
